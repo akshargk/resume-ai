@@ -31,7 +31,7 @@ function Features(){
                 Powerful Features
             </h2>
             <p
-              className="
+                className="
                     text-center
                     max-w-2xl
                     mx-auto 
