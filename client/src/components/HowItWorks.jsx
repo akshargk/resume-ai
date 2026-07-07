@@ -41,7 +41,7 @@ function HowItWorks() {
                 text-stone-500
           "
         >
-          Get your resume analyzed in three simple steps and receive personalized AI powered feedback in seconds.
+          Get your resume analyzed in three simple steps and receive personalized AI-powered feedback in seconds.
         </p>
 
           {/* Grid */}
