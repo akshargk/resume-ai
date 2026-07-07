@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Features from "./components/Features";
 import HowItWorks from "./components/HowItWorks";
+import CTA from "./components/CTA";
 
 function App(){
   return (
@@ -10,6 +11,7 @@ function App(){
       <Hero/>
       <Features/>
       <HowItWorks/>
+      <CTA/>
     </div>
   );
 }
