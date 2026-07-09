@@ -33,9 +33,9 @@ function Footer(){
                     <div>
                         <h3
                             className="
-                            text-2xl
-                            font-bold
-                            text-white
+                                text-2xl
+                                font-bold
+                                text-white
                             "
                         >
                             ResumeAI
@@ -43,10 +43,10 @@ function Footer(){
 
                         <p
                             className="
-                            mt-4
-                            max-w-xs
-                            leading-7
-                            text-stone-400
+                                mt-4
+                                max-w-xs
+                                leading-7
+                                text-stone-400
                             "
                         >
                             Transform your resume with AI-powered analysis and
