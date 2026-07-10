@@ -1,13 +1,69 @@
-import { useRef } from "react";
+import { useRef , useState } from "react";
 import { UploadCloud } from "lucide-react";
 
 function ResumeUpload(){
 
         const fileInputRef = useRef(null);
 
+        const [selectedFile, setSelectedFile] = useState(null);
+        const [error, setError] = useState("");
+        const [isDragging, setIsDragging] = useState(false);
+
+        const MAX_FILE_SIZE = 5 * 1024 * 1024;
+
         // Handling the upload button
         function handleBrowseClick(){
                 fileInputRef.current.click();
+        }
+
+        // Validate file and save it
+        function validateAndSetFile(file) {
+
+            if (!file) {
+                return;
+            }
+
+            if (file.type !== "application/pdf") {
+                setSelectedFile(null);
+                setError("Please upload a PDF file.");
+                return;
+            }
+
+            if (file.size > MAX_FILE_SIZE) {
+                setSelectedFile(null);
+                setError("File size exceeds 5 MB.");
+                return;
+            }
+
+            setError("");
+            setSelectedFile(file);
+        }
+
+        /// Handling file selection
+        function handleFileChange(event) {
+            const file = event.target.files[0];
+
+            validateAndSetFile(file);
+        }
+
+
+        function handleDragOver(event) {
+            event.preventDefault();
+            setIsDragging(true);
+        }
+
+        // Handling drag and drop
+        function handleDrop(event) {
+            event.preventDefault();
+            setIsDragging(false);
+
+            const file = event.dataTransfer.files[0];
+
+            validateAndSetFile(file);
+        }
+
+        function handleDragLeave() {
+            setIsDragging(false);
         }
 
         return(
@@ -54,20 +110,25 @@ function ResumeUpload(){
                     
                     {/* Card Upload */}
                     <div
-                        className="
-                                mt-12
-                                group
-                                rounded-3xl
-                                border-2
-                                border-dashed
-                                border-yellow-200
-                                bg-white
-                                shadow-lg
-                                p-10
-                                transition-all
-                                duration-300
-                                hover:border-yellow-400
-                        "
+                        onDragOver={handleDragOver}
+                        onDragLeave={handleDragLeave}
+                        onDrop={handleDrop}
+                        className={`
+                            mt-12
+                            group
+                            rounded-3xl
+                            border-2
+                            border-dashed
+                            shadow-lg
+                            p-10
+                            transition-all
+                            duration-300
+                            ${
+                                isDragging
+                                    ? "border-yellow-500 bg-yellow-50 scale-[1.02]"
+                                    : "border-yellow-200 bg-white hover:border-yellow-400"
+                            }
+                        `}
                     >
 
                         <div 
@@ -95,7 +156,11 @@ function ResumeUpload(){
                                         group-hover:scale-110
                                 "
                             >
-                                <UploadCloud className="h-10 w-10 text-yellow-600" />
+                                <UploadCloud
+                                className={`h-10 w-10 ${
+                                    isDragging ? "text-yellow-700" : "text-yellow-600"
+                                }`}
+                            />
                             </div>
 
                             {/* Card Heading */}
@@ -106,7 +171,7 @@ function ResumeUpload(){
                                     text-stone-900
                                 "
                             >
-                                Drag & Drop Your Resume
+                                {isDragging ? "Drop your PDF here" : "Drag & Drop Your Resume"}
                             </h3>
 
                             {/* Card Description */}
@@ -127,6 +192,7 @@ function ResumeUpload(){
                                 ref={fileInputRef}
                                 type="file"
                                 accept="application/pdf"
+                                onChange={handleFileChange}
                                 className="hidden"
                             />
 
@@ -156,7 +222,35 @@ function ResumeUpload(){
                             >
                                 Browse Files
                             </button>
+
+                            {error && (
+                                <p
+                                    className="
+                                        mt-4
+                                        text-sm
+                                        font-medium
+                                        text-red-600
+                                    "
+                                >
+                                    {error}
+                                </p>
+                            )}
                             
+                            {selectedFile && (
+                                <p
+                                    className="
+                                        mt-6
+                                        max-w-md
+                                        break-all
+                                        text-sm
+                                        font-medium
+                                        text-green-600
+                                    "
+                                >
+                                    Selected File: {selectedFile.name}
+                                </p>
+                            )}
+
                             {/* Card Upload Size Info */}
                             <p
                                 className="
