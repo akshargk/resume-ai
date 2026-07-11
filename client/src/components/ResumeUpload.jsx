@@ -8,6 +8,8 @@ function ResumeUpload(){
         const [selectedFile, setSelectedFile] = useState(null);
         const [error, setError] = useState("");
         const [isDragging, setIsDragging] = useState(false);
+        const [isAnalyzing, setIsAnalyzing] = useState(false);
+        const [analysisResult, setAnalysisResult] = useState(null);
 
         const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
@@ -39,7 +41,7 @@ function ResumeUpload(){
             setSelectedFile(file);
         }
 
-        /// Handling file selection
+        // Handling file selection
         function handleFileChange(event) {
             const file = event.target.files[0];
 
@@ -65,6 +67,35 @@ function ResumeUpload(){
         function handleDragLeave() {
             setIsDragging(false);
         }
+
+        function handleAnalyzeResume() {
+                if (!selectedFile) {
+                    setError("Please select a resume first.");
+                    return;
+                }
+
+                setIsAnalyzing(true);
+
+                // API call will go here later
+
+                setTimeout(() => {
+                    setIsAnalyzing(false);
+
+                    setAnalysisResult({
+                        atsScore: 87,
+                        strengths: [
+                            "Good resume structure",
+                            "Relevant technical skills",
+                            "Strong project descriptions"
+                        ],
+                        improvements: [
+                            "Add more measurable achievements",
+                            "Improve keyword optimization",
+                            "Shorten the summary section"
+                        ]
+                    });
+                }, 2000);
+            }
 
         return(
             <section
@@ -237,11 +268,10 @@ function ResumeUpload(){
                             )}
                             
                             {selectedFile && (
+                            <>
                                 <p
                                     className="
                                         mt-6
-                                        max-w-md
-                                        break-all
                                         text-sm
                                         font-medium
                                         text-green-600
@@ -249,18 +279,83 @@ function ResumeUpload(){
                                 >
                                     Selected File: {selectedFile.name}
                                 </p>
+
+                                <button
+                                        type="button"
+                                        onClick={handleAnalyzeResume}
+                                        disabled={isAnalyzing}
+                                        className="
+                                            mt-6
+                                            rounded-xl
+                                            bg-stone-900
+                                            px-8
+                                            py-3
+                                            text-white
+                                            font-semibold
+                                            transition-all
+                                            duration-300
+                                            hover:bg-stone-800
+                                            disabled:opacity-50
+                                            disabled:cursor-not-allowed
+                                        "
+                                    >
+                                        {isAnalyzing ? "Analyzing..." : "Analyze Resume"}
+                                </button>
+                            </>
                             )}
 
-                            {/* Card Upload Size Info */}
-                            <p
-                                className="
-                                    mt-8
-                                    text-sm
-                                    text-stone-500
-                                "
-                            >
-                                Supported format: PDF • Max size: 5 MB
-                            </p>
+                                {/* Card Upload Size Info */}
+                                <p
+                                    className="
+                                        mt-8
+                                        text-sm
+                                        text-stone-500
+                                    "
+                                >
+                                    Supported format: PDF • Max size: 5 MB
+                                </p>
+
+                                {analysisResult && (
+                                    <div
+                                        className="
+                                            mt-8
+                                            w-full
+                                            rounded-2xl
+                                            border
+                                            border-stone-200
+                                            bg-stone-50
+                                            p-6
+                                        "
+                                    >
+                                        <h3 className="text-xl font-bold text-stone-900">
+                                            Analysis Result
+                                        </h3>
+
+                                        <p className="mt-3 text-lg font-semibold text-green-600">
+                                            ATS Score: {analysisResult.atsScore}%
+                                        </p>
+
+                                        <h4 className="mt-6 font-semibold">
+                                            Strengths
+                                        </h4>
+
+                                        <ul className="mt-2 list-disc pl-6">
+                                            {analysisResult.strengths.map((item, index) => (
+                                                <li key={index}>{item}</li>
+                                            ))}
+                                        </ul>
+
+                                        <h4 className="mt-6 font-semibold">
+                                            Improvements
+                                        </h4>
+
+                                        <ul className="mt-2 list-disc pl-6">
+                                            {analysisResult.improvements.map((item, index) => (
+                                                <li key={index}>{item}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
                         </div>
                     </div>
                 </div>
