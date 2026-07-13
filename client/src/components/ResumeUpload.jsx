@@ -68,7 +68,7 @@ function ResumeUpload(){
             setIsDragging(false);
         }
 
-        function handleAnalyzeResume() {
+        async function handleAnalyzeResume() {
                 if (!selectedFile) {
                     setError("Please select a resume first.");
                     return;
@@ -78,23 +78,25 @@ function ResumeUpload(){
 
                 // API call will go here later
 
-                setTimeout(() => {
-                    setIsAnalyzing(false);
+                try {
+                    const formData = new FormData();
+                    formData.append("resume", selectedFile);
 
-                    setAnalysisResult({
-                        atsScore: 87,
-                        strengths: [
-                            "Good resume structure",
-                            "Relevant technical skills",
-                            "Strong project descriptions"
-                        ],
-                        improvements: [
-                            "Add more measurable achievements",
-                            "Improve keyword optimization",
-                            "Shorten the summary section"
-                        ]
+                    const response = await fetch("http://localhost:5000/api/analyze", {
+                        method: "POST",
+                        body: formData,
                     });
-                }, 2000);
+
+                    const data = await response.json();
+
+                    setAnalysisResult(data);
+                    
+                } catch (error) {
+                    console.error(error);
+                    setError("Something went wrong.");
+                } finally {
+                    setIsAnalyzing(false);
+                }
             }
 
         return(
