@@ -68,34 +68,37 @@ function ResumeUpload(){
             setIsDragging(false);
         }
 
-        function handleAnalyzeResume() {
-                if (!selectedFile) {
-                    setError("Please select a resume first.");
-                    return;
-                }
+        async function handleAnalyzeResume() {
 
-                setIsAnalyzing(true);
-
-                // API call will go here later
-
-                setTimeout(() => {
-                    setIsAnalyzing(false);
-
-                    setAnalysisResult({
-                        atsScore: 87,
-                        strengths: [
-                            "Good resume structure",
-                            "Relevant technical skills",
-                            "Strong project descriptions"
-                        ],
-                        improvements: [
-                            "Add more measurable achievements",
-                            "Improve keyword optimization",
-                            "Shorten the summary section"
-                        ]
-                    });
-                }, 2000);
+            if (!selectedFile) {
+                setError("Please select a resume first.");
+                return;
             }
+
+            setIsAnalyzing(true);
+
+            try {
+
+                const formData = new FormData();
+                formData.append("resume", selectedFile);
+
+                const response = await fetch("http://localhost:5000/api/analyze", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                const data = await response.json();
+
+                setAnalysisResult(data);
+
+            } catch (error) {
+                console.error(error);
+                setError("Something went wrong.");
+            } finally {
+                setIsAnalyzing(false);
+            }
+
+        }
 
         return(
             <section
