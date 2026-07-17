@@ -12,20 +12,27 @@ function Features(){
         <section
             id="features"
             className="
-                px-20
-                py-24
-                bg-white
-            "
-        >   
+                    px-6
+                    md:px-12
+                    lg:px-20
+                    py-20
+                    bg-white
+                    dark:bg-stone-900
+                    transition-colors
+                    duration-300
+                "
+            >
             {/* Heading */}
             <h2
                 className="
                         text-center
                         max-w-2xl
                         mx-auto
-                        text-4xl
+                        text-3xl
+                        md:text-4xl
                         font-bold
                         text-gray-900
+                        dark:text-white
                 "
             >
                 Powerful Features
@@ -36,8 +43,10 @@ function Features(){
                     max-w-2xl
                     mx-auto 
                     mt-4
-                    text-gray-500                   
-                    text-lg
+                    text-gray-500
+                    dark:text-stone-400                
+                    text-base
+                    md:text-lg
                 " 
             >
                 Everything you need to create a job-winning resume using AI-powered insights.
@@ -48,7 +57,9 @@ function Features(){
                 className="
                     mt-16
                     grid
-                    grid-cols-3
+                    grid-cols-1
+                    md:grid-cols-2
+                    lg:grid-cols-3
                     gap-8
                 "
             >
@@ -58,13 +69,17 @@ function Features(){
                         group
                         rounded-3xl
                         border
-                        border-gray-100
+                        bg-white
+                        dark:bg-stone-800
+                        border-stone-100
+                        dark:border-stone-700
                         shadow-lg
                         p-8
                         transition-all
                         duration-300
                         hover:-translate-y-1
                         hover:shadow-xl
+                        dark:hover:bg-stone-700
                         hover:border-yellow-200
                         cursor-pointer
                     "
@@ -99,7 +114,8 @@ function Features(){
                         className="
                             text-xl
                             font-semibold
-                            text-gray-900
+                            text-gray-900 
+                            dark:text-white
                         "
                     >
                         ATS Resume Analysis
@@ -109,7 +125,8 @@ function Features(){
                     <p
                         className="
                             mt-3
-                            text-gray-600
+                            text-gray-600 
+                            dark:text-stone-300
                             leading-7
                         "
                     >
@@ -123,13 +140,17 @@ function Features(){
                         group
                         rounded-3xl
                         border
-                        border-gray-100
+                        bg-white
+                        dark:bg-stone-800
+                        border-stone-100
+                        dark:border-stone-700
                         shadow-lg
                         p-8
                         transition-all
                         duration-300
                         hover:-translate-y-1
                         hover:shadow-xl
+                        dark:hover:bg-stone-700
                         hover:border-purple-200
                         cursor-pointer
                     "
@@ -165,7 +186,8 @@ function Features(){
                         className="
                             text-xl
                             font-semibold
-                            text-gray-900
+                            text-gray-900 
+                            dark:text-white
                         "
                     >
                         AI Feedback
@@ -175,7 +197,8 @@ function Features(){
                     <p
                         className="
                             mt-3
-                            text-gray-600
+                            text-gray-600 
+                            dark:text-stone-300
                             leading-7
                         "
                     >
@@ -189,13 +212,17 @@ function Features(){
                         group
                         rounded-3xl
                         border
-                        border-gray-100
+                        bg-white
+                        dark:bg-stone-800
+                        border-stone-100
+                        dark:border-stone-700
                         shadow-lg
                         p-8
                         transition-all
                         duration-300
                         hover:-translate-y-1
                         hover:shadow-xl
+                        dark:hover:bg-stone-700
                         hover:border-blue-200
                         cursor-pointer
                     "
@@ -231,7 +258,8 @@ function Features(){
                         className="
                             text-xl
                             font-semibold
-                            text-gray-900
+                            text-gray-900 
+                            dark:text-white
                         "
                     >
                         Resume Scoring
@@ -241,7 +269,8 @@ function Features(){
                     <p
                         className="
                             mt-3
-                            text-gray-600
+                            text-gray-600 
+                            dark:text-stone-300
                             leading-7
                         "
                     >
@@ -255,13 +284,17 @@ function Features(){
                         group
                         rounded-3xl
                         border
-                        border-gray-100
+                        bg-white
+                        dark:bg-stone-800
+                        border-stone-100
+                        dark:border-stone-700
                         shadow-lg
                         p-8
                         transition-all
                         duration-300
                         hover:-translate-y-1
                         hover:shadow-xl
+                        dark:hover:bg-stone-700
                         hover:border-orange-200
                         cursor-pointer
                     "
@@ -297,7 +330,8 @@ function Features(){
                         className="
                             text-xl
                             font-semibold
-                            text-gray-900
+                            text-gray-900 
+                            dark:text-white
                         "
                     >
                         Instant Analysis
@@ -307,7 +341,8 @@ function Features(){
                     <p
                         className="
                             mt-3
-                            text-gray-600
+                            text-gray-600 
+                            dark:text-stone-300
                             leading-7
                         "
                     >
@@ -321,13 +356,17 @@ function Features(){
                         group
                         rounded-3xl
                         border
-                        border-gray-100
+                        bg-white
+                        dark:bg-stone-800
+                        border-stone-100
+                        dark:border-stone-700
                         shadow-lg
                         p-8
                         transition-all
                         duration-300
                         hover:-translate-y-1
                         hover:shadow-xl
+                        dark:hover:bg-stone-700
                         hover:border-green-200
                         cursor-pointer
                     "
@@ -363,7 +402,8 @@ function Features(){
                         className="
                             text-xl
                             font-semibold
-                            text-gray-900
+                            text-gray-900 
+                            dark:text-white
                         "
                     >
                         Keyword Optimization
@@ -373,7 +413,8 @@ function Features(){
                     <p
                         className="
                             mt-3
-                            text-gray-600
+                            text-gray-600 
+                            dark:text-stone-300
                             leading-7
                         "
                     >
@@ -387,13 +428,17 @@ function Features(){
                         group
                         rounded-3xl
                         border
-                        border-gray-100
+                        bg-white
+                        dark:bg-stone-800
+                        border-stone-100
+                        dark:border-stone-700
                         shadow-lg
                         p-8
                         transition-all
                         duration-300
                         hover:-translate-y-1
                         hover:shadow-xl
+                        dark:hover:bg-stone-700
                         hover:border-teal-200
                         cursor-pointer
                     "
@@ -429,7 +474,8 @@ function Features(){
                         className="
                             text-xl
                             font-semibold
-                            text-gray-900
+                            text-gray-900 
+                            dark:text-white
                         "
                     >
                         Career Insights
@@ -439,7 +485,8 @@ function Features(){
                     <p
                         className="
                             mt-3
-                            text-gray-600
+                            text-gray-600 
+                            dark:text-stone-300
                             leading-7
                         "
                     >

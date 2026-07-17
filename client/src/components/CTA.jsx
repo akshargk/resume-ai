@@ -1,13 +1,18 @@
 import {
-    Upload,
+    UploadCloud,
     CheckCircle,
 } from "lucide-react";  
+
+import { Link } from "react-router-dom";
 
 function CTA() {
     return (
         <section
             className="
                     bg-stone-50
+                    dark:bg-stone-900
+                    transition-colors
+                    duration-300
                     px-6
                     py-16
             "
@@ -25,11 +30,15 @@ function CTA() {
                         max-w-4xl
                         rounded-3xl
                         border
-                        border-gray-100
+                        border-stone-100
+                        dark:border-stone-700
                         bg-white
+                        dark:bg-stone-800
                         shadow-xl
-                        px-10
-                        py-16
+                        px-6
+                        md:px-10
+                        py-12
+                        md:py-16
                         text-center
                     "
                 >
@@ -37,9 +46,11 @@ function CTA() {
                     {/* CTA Heading */}
                     <h2 
                         className="
-                                text-5xl
+                                text-3xl
+                                md:text-5xl
                                 font-bold
                                 text-stone-900
+                                dark:text-white
                         "       
                     >
                         Ready to Improve Your Resume?
@@ -55,6 +66,7 @@ function CTA() {
                             md:text-lg
                             leading-8
                             text-stone-500
+                            dark:text-stone-300
                         "
                     >
                         Upload your resume today and receive AI-powered insights,
@@ -69,14 +81,18 @@ function CTA() {
                         "
                     >
                         {/* CTA Upload Button */}
-                        <button
-                            type="button"
+                        <Link
+                            to="/upload"
                             className="
+                                w-full
+                                sm:w-auto
                                 rounded-xl
                                 bg-yellow-400
-                                px-14
+                                px-10
+                                md:px-14
                                 py-4
-                                text-lg
+                                text-base
+                                md:text-lg
                                 font-semibold
                                 text-stone-900
                                 shadow-md
@@ -86,14 +102,15 @@ function CTA() {
                                 hover:scale-105
                                 hover:bg-yellow-500
                                 hover:shadow-lg
-                                flex
+                                inline-flex
                                 items-center
+                                justify-center
                                 gap-2
                             "
-                        >   
-                            <Upload className="h-5 w-5" />
+                        >
+                            <UploadCloud className="h-5 w-5" />
                             Upload Resume
-                        </button>
+                        </Link>
                     </div>
 
                     <div 
@@ -114,6 +131,7 @@ function CTA() {
                                 text-sm
                                 font-medium
                                 text-stone-500
+                                dark:text-stone-300
                             "
                         >
                             <CheckCircle className="h-5 w-5 text-green-600" />
@@ -128,6 +146,7 @@ function CTA() {
                                 text-sm
                                 font-medium
                                 text-stone-500
+                                dark:text-stone-300
                             "
                         >
                             <CheckCircle className="h-5 w-5 text-green-600" />
@@ -142,6 +161,7 @@ function CTA() {
                                 text-sm
                                 font-medium
                                 text-stone-500
+                                dark:text-stone-300
                             "
                         >
                             <CheckCircle className="h-5 w-5 text-green-600" />

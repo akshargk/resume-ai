@@ -1,8 +1,8 @@
 import { 
     FaGithub, 
     FaLinkedin, 
-    FaTwitter 
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 function Footer(){
     return(
@@ -44,7 +44,8 @@ function Footer(){
                         <p
                             className="
                                 mt-4
-                                max-w-xs
+                                max-w-full
+                                md:max-w-xs
                                 leading-7
                                 text-stone-400
                             "
@@ -60,14 +61,29 @@ function Footer(){
                         
                             <ul className="mt-4 space-y-3 text-stone-400">
 
-                                <li className="hover:text-yellow-400 transition-colors cursor-pointer">
-                                Features
+                                <li>
+                                    <a
+                                        href="#features"
+                                        className="hover:text-yellow-400 transition-colors"
+                                    >
+                                        Features
+                                    </a>
                                 </li>
-                                <li className="hover:text-yellow-400 transition-colors cursor-pointer">
-                                How It Works
+                                <li>
+                                    <a
+                                        href="#how-it-works"
+                                        className="hover:text-yellow-400 transition-colors"
+                                    >
+                                        How It Works
+                                    </a>
                                 </li>
-                                <li className="hover:text-yellow-400 transition-colors cursor-pointer">
-                                Upload Resume
+                                <li>
+                                    <a
+                                        href="#upload"
+                                        className="hover:text-yellow-400 transition-colors"
+                                    >
+                                        Upload Resume
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -121,29 +137,41 @@ function Footer(){
                                         items-center
                                 "
                             >
-                                <FaGithub
-                                    className="
-                                        cursor-pointer
-                                        text-stone-400
-                                        transition-all
-                                        duration-300
-                                        hover:-translate-y-1
-                                        hover:text-yellow-400
-                                    "
-                                />
+                                <a
+                                    href="https://github.com/akshargk"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <FaGithub
+                                        className="
+                                            cursor-pointer
+                                            text-stone-400
+                                            transition-all
+                                            duration-300
+                                            hover:-translate-y-1
+                                            hover:text-yellow-400
+                                        "
+                                    />
+                                </a>
 
-                                <FaLinkedin
-                                    className="
-                                        cursor-pointer
-                                        text-stone-400
-                                        transition-all
-                                        duration-300
-                                        hover:-translate-y-1
-                                        hover:text-yellow-400
-                                    "
-                                />
+                                <a
+                                    href="https://www.linkedin.com/in/akshar-g-k-47b72b3b1/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <FaLinkedin
+                                        className="
+                                            cursor-pointer
+                                            text-stone-400
+                                            transition-all
+                                            duration-300
+                                            hover:-translate-y-1
+                                            hover:text-yellow-400
+                                        "
+                                    />
+                                </a>
 
-                                <FaTwitter
+                                <FaXTwitter
                                     className="
                                         cursor-pointer
                                         text-stone-400
@@ -161,10 +189,11 @@ function Footer(){
                             className="
                                 mt-12
                                 border-t
-                                border-stone-800
+                                border-stone-700
                                 pt-8
                                 flex
                                 justify-center
+                                text-center
                                 text-sm
                                 text-stone-500
                             "

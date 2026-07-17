@@ -6,26 +6,45 @@ import {
     UploadCloud
 } from "lucide-react";
 
-function Hero() {
+import { Link } from "react-router-dom";
+
+function Hero({ analysisResult }) {
     return (
         <section
             className="
                 flex
-                min-h-screen
+                flex-col
+                lg:flex-row
                 items-center
                 justify-between
-                px-20
+                gap-12
+                px-6
+                md:px-10
+                lg:px-20
+                py-16
+                min-h-screen
+                bg-stone-50
+                dark:bg-stone-900
+                text-stone-900
+                dark:text-white
+                transition-colors
+                duration-300
             "
         >
             {/* Left Side */}
             <div
                 className="
-                    w-1/2
+                    w-full
+                    lg:w-1/2
+                    text-center
+                    lg:text-left
                 "
             >
                 <h1
                     className="
-                        text-6xl
+                        text-4xl
+                        md:text-5xl
+                        lg:text-6xl
                         font-bold
                         leading-tight
                     "
@@ -40,8 +59,10 @@ function Hero() {
                 <p
                     className="
                         mt-6
-                        text-lg
-                        text-gray-600
+                        text-base
+                        md:text-lg
+                        text-gray-600 
+                        dark:text-stone-300
                     "
                 >
                     Upload your resume and receive ATS scoring,
@@ -52,10 +73,16 @@ function Hero() {
                     className="
                         mt-8
                         flex
+                        flex-col
+                        sm:flex-row
+                        justify-center
+                        lg:justify-start
                         gap-4
                     "
                 >
-                    <button
+
+                    <Link
+                        to="/upload"
                         className="
                             bg-yellow-400
                             px-6
@@ -72,39 +99,45 @@ function Hero() {
                             hover:bg-yellow-500
                             hover:-translate-y-1
                             hover:shadow-lg
+                            w-fit
                         "
                     >
                         <UploadCloud className="w-5 h-5" />
                         Upload Resume
-                    </button>
+                    </Link>
 
-                    <a
-                        href="#features"
+                    <Link
+                        to="/#features"
                         className="
                             px-6
                             py-3
                             font-medium
                             text-teal-700
-                            transition-colors
-                            duration-300
+                            dark:text-teal-400
                             hover:text-teal-800
+                            dark:hover:text-teal-300
                         "
                     >
                         Learn More ➜
-                    </a>
+                    </Link>
                 </div>
             </div>
 
             {/* Right Side */}
             <div
                 className="
-                    w-1/2
+                    w-full
+                    lg:w-1/2
                 "
             >
                 <div
                     className="
                         bg-white
+                        dark:bg-stone-800
                         shadow-xl
+                        border
+                        border-stone-100
+                        dark:border-stone-700
                         rounded-3xl
                         p-8
                         w-full
@@ -115,7 +148,8 @@ function Hero() {
                         className="
                             text-xl
                             font-bold
-                            text-gray-800
+                            text-gray-800 
+                            dark:text-white
                         "
                     >
                         Resume Overview
@@ -125,6 +159,8 @@ function Hero() {
                     <div
                         className="
                             flex
+                            flex-col
+                            md:flex-row
                             gap-6
                             mt-8
                         "
@@ -132,10 +168,14 @@ function Hero() {
                         {/* Resume Score */}
                         <section
                             className="
-                                w-1/2
+                                w-full
+                                md:w-1/2
                                 rounded-2xl
                                 border
-                                border-gray-100
+                                border-stone-100 
+                                dark:border-stone-700
+                                bg-white 
+                                dark:bg-stone-800
                                 shadow-md
                                 p-6
                             "
@@ -144,7 +184,8 @@ function Hero() {
                                 className="
                                     text-sm
                                     font-medium
-                                    text-gray-500
+                                    text-gray-500 
+                                    dark:text-stone-400
                                 "
                             >
                                 Resume Score
@@ -158,23 +199,26 @@ function Hero() {
                                     text-teal-700
                                 "
                             >
-                                91 / 100
+                                {analysisResult?.atsScore ?? 91}/100
                             </p>
 
-                            {/* Progress Bar */}
+                            {/* Resume Score Progress Bar */}
                             <div
                                 className="
                                     w-full
                                     h-2
                                     mt-3
                                     rounded-full
-                                    bg-gray-200
+                                    bg-gray-200 
+                                    dark:bg-stone-700
                                 "
                             >
                                 <div
+                                    style={{
+                                        width: `${analysisResult?.atsScore ?? 91}%`,
+                                    }}
                                     className="
                                         h-full
-                                        w-[91%]
                                         rounded-full
                                         bg-teal-700
                                     "
@@ -185,10 +229,14 @@ function Hero() {
                         {/* ATS Compatibility */}
                         <section
                             className="
-                                w-1/2
+                                w-full
+                                md:w-1/2
                                 rounded-2xl
                                 border
-                                border-gray-100
+                                border-stone-100 
+                                dark:border-stone-700
+                                bg-white 
+                                dark:bg-stone-800
                                 shadow-md
                                 p-6
                             "
@@ -197,7 +245,8 @@ function Hero() {
                                 className="
                                     text-sm
                                     font-medium
-                                    text-gray-500
+                                    text-gray-500 
+                                    dark:text-stone-400
                                 "
                             >
                                 ATS Compatibility
@@ -211,23 +260,26 @@ function Hero() {
                                     text-teal-700
                                 "
                             >
-                                94%
+                                {analysisResult?.atsCompatibility ?? 94}%
                             </p>
 
-                            {/* Progress Bar */}
+                            {/* ATS Progress Bar */}
                             <div
                                 className="
                                     w-full
                                     h-2
                                     mt-3
                                     rounded-full
-                                    bg-gray-200
+                                    bg-gray-200 
+                                    dark:bg-stone-700
                                 "
                             >
                                 <div
+                                    style={{
+                                        width: `${analysisResult?.atsCompatibility ?? 94}%`,
+                                    }}
                                     className="
                                         h-full
-                                        w-[94%]
                                         rounded-full
                                         bg-teal-700
                                     "
@@ -244,7 +296,8 @@ function Hero() {
                                 mb-4
                                 text-lg
                                 font-bold
-                                text-gray-800
+                                text-gray-800 
+                                dark:text-white
                             "
                         >
                             Top Suggestions
@@ -254,33 +307,33 @@ function Hero() {
                             className="
                                 rounded-2xl
                                 border
-                                border-gray-100
+                                border-stone-100
+                                dark:border-stone-700
                                 shadow-md
                                 px-6
                                 divide-y
                                 divide-gray-100
+                                dark:divide-stone-700
                             "
                         >
                             {/* 1st Suggestion */}
                             <div
                                 className="
                                     flex
-                                    items-center
+                                    flex-col
+                                    sm:flex-row
+                                    sm:items-center
                                     justify-between
+                                    gap-4
                                     py-5
-                                    hover:bg-gray-50
+                                    hover:bg-gray-50 
+                                    dark:hover:bg-stone-700
                                     transition
                                     duration-200
                                     cursor-pointer
                                 "
                             >
-                                <div
-                                    className="
-                                        flex
-                                        items-center
-                                        gap-4
-                                    "
-                                >
+                                <div className="flex items-center gap-4">
                                     <div
                                         className="
                                             h-9
@@ -292,68 +345,45 @@ function Hero() {
                                             justify-center
                                         "
                                     >
-                                        <Sparkles
-                                            className="
-                                                w-5
-                                                h-5
-                                                text-yellow-500
-                                            "
-                                        />
+                                        <Sparkles className="w-5 h-5 text-yellow-500" />
                                     </div>
 
                                     <div>
-                                        <h4
-                                            className="
-                                                text-lg
-                                                font-semibold
-                                                text-gray-900
-                                            "
-                                        >
-                                            Improve your summary
+                                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                                            {analysisResult
+                                                ? "Top Improvement"
+                                                : "Improve your summary"}
                                         </h4>
 
-                                        <p
-                                            className="
-                                                mt-1
-                                                text-sm
-                                                text-gray-500
-                                            "
-                                        >
-                                            Make your summary more impactful and
-                                            tailored.
+                                        <p className="mt-1 text-sm text-gray-500 dark:text-stone-400">
+                                            {analysisResult
+                                                ? `${analysisResult.improvements[0].slice(0, 90)}...`
+                                                : "Make your summary more impactful and tailored."}
                                         </p>
                                     </div>
                                 </div>
 
-                                <ChevronRight
-                                    className="
-                                        w-5
-                                        h-5
-                                        text-gray-400
-                                    "
-                                />
+                                <ChevronRight className="w-5 h-5 text-gray-400 dark:text-stone-500" />
                             </div>
 
                             {/* 2nd Suggestion */}
                             <div
                                 className="
                                     flex
-                                    items-center
+                                    flex-col
+                                    sm:flex-row
+                                    sm:items-center
                                     justify-between
+                                    gap-4
                                     py-5
-                                    hover:bg-gray-50
+                                    hover:bg-gray-50 
+                                    dark:hover:bg-stone-700
                                     transition
                                     duration-200
                                     cursor-pointer
                                 "
                             >
-                                <div
-                                    className="
-                                        flex
-                                        items-center
-                                        gap-4
-                                    "
-                                >
+                                <div className="flex items-center gap-4">
                                     <div
                                         className="
                                             h-9
@@ -365,68 +395,45 @@ function Hero() {
                                             justify-center
                                         "
                                     >
-                                        <Search
-                                            className="
-                                                w-5
-                                                h-5
-                                                text-teal-500
-                                            "
-                                        />
+                                        <Search className="w-5 h-5 text-teal-500" />
                                     </div>
 
                                     <div>
-                                        <h4
-                                            className="
-                                                text-lg
-                                                font-semibold
-                                                text-gray-900
-                                            "
-                                        >
-                                            Add more relevant keywords
+                                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                                            {analysisResult
+                                                ? "Keyword Optimization"
+                                                : "Add more relevant keywords"}
                                         </h4>
 
-                                        <p
-                                            className="
-                                                mt-1
-                                                text-sm
-                                                text-gray-500
-                                            "
-                                        >
-                                            Include industry-specific keywords
-                                            to improve ATS matching.
+                                        <p className="mt-1 text-sm text-gray-500 dark:text-stone-400">
+                                            {analysisResult
+                                                ? `${analysisResult.improvements[1].slice(0, 90)}...`
+                                                : "Include industry-specific keywords to improve ATS matching."}
                                         </p>
                                     </div>
                                 </div>
 
-                                <ChevronRight
-                                    className="
-                                        w-5
-                                        h-5
-                                        text-gray-400
-                                    "
-                                />
+                                <ChevronRight className="w-5 h-5 text-gray-400 dark:text-stone-500" />
                             </div>
 
                             {/* 3rd Suggestion */}
                             <div
                                 className="
                                     flex
-                                    items-center
+                                    flex-col
+                                    sm:flex-row
+                                    sm:items-center
                                     justify-between
+                                    gap-4
                                     py-5
-                                    hover:bg-gray-50
+                                    hover:bg-gray-50 
+                                    dark:hover:bg-stone-700
                                     transition
                                     duration-200
                                     cursor-pointer
                                 "
                             >
-                                <div
-                                    className="
-                                        flex
-                                        items-center
-                                        gap-4
-                                    "
-                                >
+                                <div className="flex items-center gap-4">
                                     <div
                                         className="
                                             h-9
@@ -438,62 +445,39 @@ function Hero() {
                                             justify-center
                                         "
                                     >
-                                        <TrendingUp
-                                            className="
-                                                w-5
-                                                h-5
-                                                text-teal-500
-                                            "
-                                        />
+                                        <TrendingUp className="w-5 h-5 text-teal-500" />
                                     </div>
 
                                     <div>
-                                        <h4
-                                            className="
-                                                text-lg
-                                                font-semibold
-                                                text-gray-900
-                                            "
-                                        >
-                                            Quantify your achievements
+                                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                                            {analysisResult
+                                                ? "Resume Enhancement"
+                                                : "Quantify your achievements"}
                                         </h4>
 
-                                        <p
-                                            className="
-                                                mt-1
-                                                text-sm
-                                                text-gray-500
-                                            "
-                                        >
-                                            Use numbers and measurable results
-                                            to highlight your impact.
-                                        </p>
+                                        <p className="mt-1 text-sm text-gray-500 dark:text-stone-400">
+                                        {analysisResult
+                                            ? `${analysisResult.improvements[2].slice(0, 90)}...`
+                                            : "Use numbers and measurable results to highlight your impact."}
+                                    </p>
                                     </div>
                                 </div>
 
-                                <ChevronRight
-                                    className="
-                                        w-5
-                                        h-5
-                                        text-gray-400
-                                    "
-                                />
+                                <ChevronRight className="w-5 h-5 text-gray-400 dark:text-stone-500" />
                             </div>
                         </div>
                     </section>
 
                     {/* Skills Detected */}
-                    <section
-                        className="
-                            mt-6
-                        "
-                    >
+                    <section className="mt-6">
                         <h3
                             className="
                                 mb-4
                                 text-lg
                                 font-bold
-                                text-gray-800
+                                text-gray-800 
+                                dark:text-white
+                                dark:text-white
                             "
                         >
                             Skills Detected
@@ -503,7 +487,10 @@ function Hero() {
                             className="
                                 rounded-2xl
                                 border
-                                border-gray-100
+                                border-stone-100 
+                                dark:border-stone-700
+                                bg-white 
+                                dark:bg-stone-800
                                 shadow-md
                                 p-6
                             "
@@ -515,89 +502,119 @@ function Hero() {
                                     gap-3
                                 "
                             >
-                                <div
-                                    className="
-                                        px-4
-                                        py-2
-                                        rounded-full
-                                        bg-teal-50
-                                        text-teal-700
-                                        text-sm
-                                        font-medium
-                                    "
-                                >
-                                    JavaScript
-                                </div>
+                                {analysisResult?.skills ? (
+                                    analysisResult.skills.map((skill, index) => (
+                                        <div
+                                            key={index}
+                                            className="
+                                                px-3
+                                                py-2
+                                                rounded-full
+                                                bg-teal-50
+                                                text-teal-700
+                                                dark:bg-teal-900/40
+                                                dark:text-teal-300
+                                                text-xs
+                                                sm:text-sm
+                                                font-medium
+                                            "
+                                        >
+                                            {skill}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <>
+                                        <div className="
+                                                    px-3
+                                                    py-2
+                                                    rounded-full
+                                                    bg-teal-50
+                                                    text-teal-700
+                                                    dark:bg-teal-900/40
+                                                    dark:text-teal-300
+                                                    text-xs sm:text-sm
+                                                    font-medium
+                                            "
+                                        >
+                                            JavaScript
+                                        </div>
 
-                                <div
-                                    className="
-                                        px-4
-                                        py-2
-                                        rounded-full
-                                        bg-teal-50
-                                        text-teal-700
-                                        text-sm
-                                        font-medium
-                                    "
-                                >
-                                    React
-                                </div>
+                                        <div className="
+                                                    px-3
+                                                    py-2
+                                                    rounded-full
+                                                    bg-teal-50
+                                                    text-teal-700
+                                                    dark:bg-teal-900/40
+                                                    dark:text-teal-300
+                                                    text-xs sm:text-sm
+                                                    font-medium
+                                            "
+                                        >
+                                            React
+                                        </div>
 
-                                <div
-                                    className="
-                                        px-4
-                                        py-2
-                                        rounded-full
-                                        bg-teal-50
-                                        text-teal-700
-                                        text-sm
-                                        font-medium
-                                    "
-                                >
-                                    Node.js
-                                </div>
+                                        <div className="
+                                                    px-3
+                                                    py-2
+                                                    rounded-full
+                                                    bg-teal-50
+                                                    text-teal-700
+                                                    dark:bg-teal-900/40
+                                                    dark:text-teal-300
+                                                    text-xs sm:text-sm
+                                                    font-medium
+                                            "
+                                        >
+                                            Node.js
+                                        </div>
 
-                                <div
-                                    className="
-                                        px-4
-                                        py-2
-                                        rounded-full
-                                        bg-teal-50
-                                        text-teal-700
-                                        text-sm
-                                        font-medium
-                                    "
-                                >
-                                    TypeScript
-                                </div>
+                                        <div className="
+                                                    px-3
+                                                    py-2
+                                                    rounded-full
+                                                    bg-teal-50
+                                                    text-teal-700
+                                                    dark:bg-teal-900/40
+                                                    dark:text-teal-300
+                                                    text-xs sm:text-sm
+                                                    font-medium
+                                            "
+                                        >
+                                            TypeScript
+                                        </div>
 
-                                <div
-                                    className="
-                                        px-4
-                                        py-2
-                                        rounded-full
-                                        bg-teal-50
-                                        text-teal-700
-                                        text-sm
-                                        font-medium
-                                    "
-                                >
-                                    SQL
-                                </div>
+                                        <div className="
+                                                    px-3
+                                                    py-2
+                                                    rounded-full
+                                                    bg-teal-50
+                                                    text-teal-700
+                                                    dark:bg-teal-900/40
+                                                    dark:text-teal-300
+                                                    text-xs sm:text-sm
+                                                    font-medium
+                                            "
+                                        >
+                                            SQL
+                                        </div>
 
-                                <div
-                                    className="
-                                        px-4
-                                        py-2
-                                        rounded-full
-                                        bg-gray-100
-                                        text-gray-600
-                                        text-sm
-                                        font-medium
-                                    "
-                                >
-                                    +8
-                                </div>
+                                        <div className="
+                                                    px-3
+                                                    py-2
+                                                    rounded-full
+                                                    bg-teal-50
+                                                    text-teal-700
+                                                    dark:bg-teal-900/40
+                                                    dark:text-teal-300
+                                                    text-xs sm:text-sm
+                                                    font-medium
+                                            "
+                                        >
+                                            +8
+                                        </div>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </section>
