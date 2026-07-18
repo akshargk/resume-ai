@@ -107,13 +107,12 @@ function ResumeUpload({
                 const formData = new FormData();
                 formData.append("resume", selectedFile);
 
-                const response = await fetch(
-                    `${import.meta.env.VITE_API_URL}/api/analyze`,
-                    {
-                        method: "POST",
-                        body: formData,
-                    }
-                );
+                const API_URL = import.meta.env.VITE_API_URL.replace(/\/$/, "");
+
+                const response = await fetch(`${API_URL}/api/analyze`, {
+                    method: "POST",
+                    body: formData,
+                });
                 
                 if (!response.ok) {
                     throw new Error("Failed to analyze resume.");
@@ -121,8 +120,15 @@ function ResumeUpload({
 
                 const data = await response.json();
 
-                setAnalysisResult(data);
+                console.log("Backend Response:", data);
 
+                if (data.message) {
+                    setError(data.message);
+                    toast.error(data.message);
+                    return;
+                }
+
+                setAnalysisResult(data);
                 toast.success("Resume analyzed successfully!");
 
             } catch (error) {
@@ -298,10 +304,11 @@ function ResumeUpload({
                     duration-300
                 "
             >
-                <div 
+                <div
                     className="
-                            mx-auto
-                            max-w-3xl
+                        mx-auto
+                        w-full
+                        max-w-4xl
                     "
                 >
 
@@ -346,7 +353,8 @@ function ResumeUpload({
                             border-2
                             border-dashed
                             shadow-lg
-                            p-10
+                            p-6 
+                            md:p-10
                             transition-all
                             duration-300
                             ${
@@ -430,9 +438,13 @@ function ResumeUpload({
                                 disabled={loading}
                                 className="
                                     mt-8
+                                    w-full
+                                    sm:w-auto
+                                    sm:min-w-[220px]
                                     rounded-xl
                                     bg-yellow-400
-                                    px-14
+                                    px-6
+                                    sm:px-10
                                     py-4
                                     text-lg
                                     font-semibold
@@ -448,6 +460,7 @@ function ResumeUpload({
                                     disabled:hover:shadow-md
                                     flex
                                     items-center
+                                    justify-center
                                     gap-2
                                 "
                             >
@@ -475,9 +488,14 @@ function ResumeUpload({
                                                 text-sm
                                                 font-medium
                                                 text-green-600
+                                                w-full
+                                                break-all
+                                                text-center
                                             "
                                         >
-                                            📄 Selected File: {selectedFile.name}
+                                            📄 Selected File:
+                                            <br />
+                                            {selectedFile.name}
                                         </p>
 
                                         <button
@@ -548,7 +566,8 @@ function ResumeUpload({
                                 {analysisResult && (
                                     <div
                                         className="
-                                            mt-20
+                                            mt-12
+                                            w-full
                                             bg-white
                                             dark:bg-stone-800
                                             rounded-3xl
@@ -559,17 +578,18 @@ function ResumeUpload({
                                             p-8
                                             transition-colors
                                             duration-300
+                                            clear-both
                                         "
                                     >
 
                                         {/* Header */}
-                                        <div className="flex justify-between items-center mb-6">
+                                        <div className="flex flex-col gap-6 md:flex-row md:justify-between md:items-center mb-6">
 
-                                            <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
+                                            <h2 className="text-3xl md:text-4xl font-bold break-words text-gray-900 dark:text-white">
                                                 Resume Analysis
                                             </h2>
 
-                                            <div className="bg-green-100 rounded-xl px-6 py-4 shadow-sm text-center w-44">
+                                            <div className="bg-green-100 rounded-xl px-6 py-4 shadow-sm text-center w-full md:w-44">
                                                 <p className="text-xs uppercase tracking-wider text-green-700">
                                                     ATS SCORE
                                                 </p>
@@ -684,16 +704,20 @@ function ResumeUpload({
                                                 border
                                                 border-stone-200
                                                 dark:border-stone-700
-                                                rounded-3xl p-8 shadow-sm
+                                                rounded-3xl 
+                                                p-5 
+                                                md:p-8
+                                                shadow-sm
                                             "
                                         >
 
-                                            <h2 className="text-3xl font-bold dark:text-white font-bold mb-6">
+                                            <h2 className="text-2xl md:text-3xl font-bold dark:text-white mb-6">
                                                 Cover Letter
                                             </h2>
 
                                             <div
                                                 className="
+                                                    w-full
                                                     bg-stone-50
                                                     dark:bg-stone-900
                                                     border
@@ -703,93 +727,158 @@ function ResumeUpload({
                                                     p-6
                                                     leading-8
                                                     whitespace-pre-line
+                                                    max-h-[500px]
+                                                    overflow-y-auto
+                                                    text-left
+                                                    break-words
                                                     text-stone-700
                                                     dark:text-stone-200
-                                                    transition-colors
-                                                    duration-300
                                                 "
                                             >
                                                 {analysisResult.coverLetter}
                                             </div>
 
-                                            <div className="flex gap-4 mt-6">
+                                            <div
+                                                className="
+                                                    mt-6
+                                                    flex
+                                                    flex-col
+                                                    gap-3
+                                                    sm:flex-row
+                                                    sm:justify-between
+                                                    lg:justify-end
+                                                "
+                                            >
 
                                                 <button
                                                     onClick={handleCopy}
                                                     className="
-                                                        flex items-center gap-2
-                                                        bg-black text-white
-                                                        px-5 py-3
-                                                        rounded-xl
-                                                        hover:bg-gray-800
+                                                        w-full
+                                                        md:w-auto
+                                                        inline-flex
+                                                        items-center
+                                                        justify-center
+                                                        gap-2
+                                                        rounded-lg
+                                                        border
+                                                        border-stone-300
+                                                        dark:border-stone-600
+                                                        bg-white
+                                                        dark:bg-stone-800
+                                                        px-4
+                                                        py-2
+                                                        text-sm
+                                                        font-medium
+                                                        text-stone-700
+                                                        dark:text-stone-100
                                                         transition
+                                                        hover:bg-stone-100
+                                                        dark:hover:bg-stone-700
                                                     "
                                                 >
-                                                    <Copy size={18} />
-                                                    {copied ? "✓ Copied!" : "Copy"}
+                                                    <Copy size={16} />
+                                                    {copied ? "Copied!" : "Copy"}
                                                 </button>
 
                                                 <button
                                                     onClick={downloadCoverLetter}
                                                     className="
-                                                        flex items-center gap-2
-                                                        bg-green-600 text-white
-                                                        px-5 py-3
-                                                        rounded-xl
-                                                        hover:bg-green-700
+                                                        w-full
+                                                        md:w-auto
+                                                        inline-flex
+                                                        items-center
+                                                        justify-center
+                                                        gap-2
+                                                        rounded-lg
+                                                        bg-green-600
+                                                        px-4
+                                                        py-2
+                                                        text-sm
+                                                        font-medium
+                                                        text-white
                                                         transition
+                                                        hover:bg-green-700
                                                     "
                                                 >
-                                                    <Download size={18} />
+                                                    <Download size={16} />
                                                     Download
                                                 </button>
-                                                
                                             </div>
-
-                                            <button
-                                                onClick={() => {
-                                                    setSelectedFile(null);
-                                                    setAnalysisResult(null);
-                                                    setError("");
-                                                    setCopied(false);
-                                                    fileInputRef.current.value = "";
-                                                    fileInputRef.current.click();
-                                                }}
-                                                className="
-                                                    mt-8
-                                                    w-full
-                                                    flex items-center justify-center gap-2
-                                                    rounded-xl
-                                                    bg-yellow-400
-                                                    px-6 py-3
-                                                    font-semibold
-                                                    text-stone-900
-                                                    transition
-                                                    hover:bg-yellow-500
-                                                "
-                                            >
-                                                <RefreshCw size={18} />
-                                                Analyze Another Resume
-                                            </button>
                                         </div>
-                                        <button
-                                            onClick={downloadAnalysisReport}
-                                            className="
-                                                mt-4
-                                                w-full
-                                                flex items-center justify-center gap-2
-                                                rounded-xl
-                                                bg-stone-900
-                                                px-6 py-3
-                                                font-semibold
-                                                text-white
-                                                transition
-                                                hover:bg-stone-800
-                                            "
-                                        >  
-                                            <FileText size={18} />
-                                            Download Analysis Report
-                                        </button>
+
+                                            <div
+                                                className="
+                                                    mt-6
+                                                    flex
+                                                    flex-col
+                                                    gap-4
+                                                    lg:flex-row
+                                                "
+                                            >        
+                                                <button
+                                                    onClick={downloadAnalysisReport}
+                                                    className="
+                                                        w-full
+                                                        lg:flex-1
+                                                        flex
+                                                        items-center
+                                                        justify-center
+                                                        gap-2
+                                                        rounded-xl
+                                                        bg-stone-900
+                                                        px-6
+                                                        py-3
+                                                        font-semibold
+                                                        text-white
+                                                        transition
+                                                        hover:bg-stone-800
+                                                    "
+                                                >
+                                                    <FileText size={18} />
+
+                                                    <span className="sm:hidden">
+                                                        Download Report
+                                                    </span>
+
+                                                    <span className="hidden sm:inline">
+                                                        Download Analysis Report
+                                                    </span>
+                                                </button>
+
+                                                <button
+                                                    onClick={() => {
+                                                        setSelectedFile(null);
+                                                        setAnalysisResult(null);
+                                                        setError("");
+                                                        setCopied(false);
+                                                        fileInputRef.current.value = "";
+                                                        fileInputRef.current.click();
+                                                    }}
+                                                    className="
+                                                        w-full
+                                                        lg:flex-1
+                                                        min-h-[56px]
+                                                        flex
+                                                        items-center
+                                                        justify-center
+                                                        gap-3
+                                                        rounded-xl
+                                                        bg-yellow-400
+                                                        px-6
+                                                        py-3
+                                                        font-semibold
+                                                        text-stone-900
+                                                        transition
+                                                        hover:bg-yellow-500
+                                                    "
+                                                >
+                                                    <RefreshCw size={18} className="shrink-0" />
+
+                                                    <span className="whitespace-nowrap">
+                                                        Analyze Another Resume
+                                                    </span>
+                                                </button>
+                                            </div>
                                     </div>
                                 )}
                         </div>

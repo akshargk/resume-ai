@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
+
 import { 
     FaGithub, 
     FaLinkedin, 
@@ -62,20 +65,20 @@ function Footer(){
                             <ul className="mt-4 space-y-3 text-stone-400">
 
                                 <li>
-                                    <a
-                                        href="#features"
+                                    <HashLink
+                                        smooth to="/#features"
                                         className="hover:text-yellow-400 transition-colors"
                                     >
                                         Features
-                                    </a>
+                                    </HashLink>
                                 </li>
                                 <li>
-                                    <a
-                                        href="#how-it-works"
+                                    <HashLink
+                                        smooth to="/#how-it-works"
                                         className="hover:text-yellow-400 transition-colors"
                                     >
                                         How It Works
-                                    </a>
+                                    </HashLink>
                                 </li>
                                 <li>
                                     <a

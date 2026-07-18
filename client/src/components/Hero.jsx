@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 
 import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
 function Hero({ analysisResult }) {
     return (
@@ -106,8 +107,8 @@ function Hero({ analysisResult }) {
                         Upload Resume
                     </Link>
 
-                    <Link
-                        to="/#features"
+                    <HashLink
+                        smooth to="/#features"
                         className="
                             px-6
                             py-3
@@ -119,7 +120,7 @@ function Hero({ analysisResult }) {
                         "
                     >
                         Learn More ➜
-                    </Link>
+                    </HashLink>
                 </div>
             </div>
 

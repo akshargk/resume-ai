@@ -185,6 +185,9 @@ app.post("/api/analyze", upload.single("resume"), async (req, res) => {
         // Delete uploaded PDF after analysis
         fs.unlinkSync(req.file.path);
 
+        console.log("Sending analysis to frontend:");
+        console.log(analysis);
+
         // Send proper JSON to frontend
         res.json(analysis);
 

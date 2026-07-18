@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import { Moon, Sun } from "lucide-react";
 
 function Navbar({ darkMode, setDarkMode }) {
@@ -55,19 +56,19 @@ function Navbar({ darkMode, setDarkMode }) {
                     )}
                 </button>
 
-                <Link
-                    to="/#features"
+                <HashLink
+                    smooth to="/#features"
                     className="text-stone-700 dark:text-stone-200 hover:text-yellow-500 transition-colors"
                 >
                     Features
-                </Link>
+                </HashLink>
 
-                <Link
-                    to="/#how-it-works"
+                <HashLink
+                    smooth to="/#how-it-works"
                     className="text-stone-700 dark:text-stone-200 hover:text-yellow-500 transition-colors"
                 >
                     How It Works
-                </Link>
+                </HashLink>
 
                 {location.pathname !== "/upload" && (
                     <Link

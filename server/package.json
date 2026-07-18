@@ -4,7 +4,8 @@
   "description": "ResumeAI Backend",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +19,8 @@
     "groq-sdk": "^1.3.0",
     "multer": "^2.2.0",
     "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
