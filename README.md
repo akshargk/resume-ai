@@ -2,6 +2,13 @@
 
 ResumeAI is an AI-powered resume analysis web application that helps users evaluate and improve their resumes using Large Language Models (LLMs). Users can upload a PDF resume and receive an ATS score, compatibility analysis, strengths, improvement suggestions, detected technical skills, and a personalized cover letter.
 
+## 🌐 Live Demo
+
+- **Frontend:** https://resume-ai-wine-omega.vercel.app/
+- **Backend API:** https://resume-ai-y5gg.onrender.com
+
+---
+
 ## ✨ Features
 
 - 📄 Upload PDF resumes
